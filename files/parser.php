@@ -46,14 +46,12 @@ function parser_parseScenarioJson($path_to_file)
     $initial_state = array(
         "id" => $initial_state_id
     );
-    if (array_key_exists("default_message", $scenario_data)) {
-        $initial_state["label"] = $scenario_data["default_message"];
-    }
+
     if (array_key_exists("start_buttons", $scenario_data)) {
         $initial_state["ways"] = $scenario_data["start_buttons"];
     }
-    if (array_key_exists("greeting_message", $scenario_data)) {
-        $initial_state["text"] = $scenario_data["greeting_message"];
+    if (array_key_exists("default_message", $scenario_data)) {
+        $initial_state["text"] = $scenario_data["default_message"];
     }
 
     $nodes[$initial_state_id] = $initial_state;

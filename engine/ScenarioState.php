@@ -14,19 +14,26 @@ class ScenarioState
 
     private $label;
 
+    private $color;
+
     private $ways = array();
 
     private $used = false;
 
-    function __construct($id, $label, $text, $ways = array())
+    function __construct($id, $label, $text, $options = array())
     {
         $this->id = $id;
         $this->label = $label;
         $this->text = $text;
 
-        if ($ways) {
-            foreach ($ways as $row) {
-                $this->ways[] = $row;
+        if (!empty($options)) {
+            if (array_key_exists("color", $options)) {
+                $this->color = $options["color"];
+            }
+            if (!empty($options["ways"])) {
+                foreach ($options["ways"] as $row) {
+                    $this->ways[] = $row;
+                }
             }
         }
     }
@@ -43,12 +50,20 @@ class ScenarioState
         return $this->id;
     }
 
+    function getColor() {
+        return $this->color;
+    }
+
     function getWays() {
         return $this->ways;
     }
 
     function hasWays() {
         return !empty($this->ways);
+    }
+
+    function hasColor() {
+        return isset($this->color);
     }
 
     function isUsed() {

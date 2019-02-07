@@ -57,12 +57,14 @@ class Parser
                     exit(self::INVALID_FORMAT . "Check parameters of button $button");
                 }
 
+                $options = array();
                 if (array_key_exists("ways", $value)) {
-                    $this->states[$button] = new ScenarioState($button, $value["label"],
-                        $value["text"], $value["ways"]);
-                } else {
-                    $this->states[$button] = new ScenarioState($button, $value["label"], $value["text"]);
+                    $options["ways"] = $value["ways"];
                 }
+                if (array_key_exists("color", $value)) {
+                    $options["color"] = $value["color"];
+                }
+                $this->states[$button] = new ScenarioState($button, $value["label"], $value["text"], $options);
             }
         }
 
@@ -190,6 +192,9 @@ class Parser
             if ($state->hasWays()) {
                 $result["states"][$state->getId()]["ways"] = $state->getWays();
             }
+            if ($state->hasColor()) {
+                $result["states"][$state->getId()]["color"] = $state->getColor();
+            }
         }
 
         $initial_state_id = "initial_state" . rand();
@@ -197,7 +202,7 @@ class Parser
             "id" => $initial_state_id,
             "label" => $this->getDefaultMessage(),
             "ways" => $this->getStartButtons(),
-            "text" => $this->getGreetingMessage()
+            "text" => $this->getDefaultMessage()
         );
 
         $result["states"][$initial_state["id"]] = $initial_state;

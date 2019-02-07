@@ -66,7 +66,7 @@ function scenario_processMessage($user_id, $message, $payload)
 
     if (!is_array($payload)) {
         $storage->setCurrentState($user_id, $storage->getStartStateId());
-        _scenario_sendMessage($user_id, GREETING_MESSAGE);
+        _scenario_sendMessage($user_id, DEFAULT_MESSAGE);
     }
 
     if (!$payload["next_state"]) {
@@ -75,7 +75,7 @@ function scenario_processMessage($user_id, $message, $payload)
 
     if ($payload["next_state"] == $storage->getStartStateId()) {
         $storage->setCurrentState($user_id, $payload["next_state"]);
-        _scenario_sendMessage($user_id, GREETING_MESSAGE);
+        _scenario_sendMessage($user_id, DEFAULT_MESSAGE);
         return;
     }
 
@@ -121,7 +121,13 @@ function _scenario_sendMessage($user_id, $message)
                 $next_payload = json_encode(array(
                     "next_state" => $next_state["id"]
                 ), JSON_UNESCAPED_UNICODE);
-                $keyboard->add_button($next_state["label"], $next_payload, Keyboard::GREEN);
+
+                if (array_key_exists("color", $next_state)) {
+                    $color = Keyboard::getColor($next_state["color"]);
+                } else {
+                    $color = Keyboard::GREEN;
+                }
+                $keyboard->add_button($next_state["label"], $next_payload, $color);
             }
             $keyboard->new_row();
         }
