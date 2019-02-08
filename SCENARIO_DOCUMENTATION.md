@@ -94,7 +94,7 @@ Optional parameter. Id-s of buttons, which will be displayed after pushing the b
 ```
 
 ## start_buttons
-Same as ways: buttons, displayed at the beginning
+Same as `button` **ways**: buttons, displayed at the beginning
 ```json
 {
  "start_buttons": [
