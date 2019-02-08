@@ -117,4 +117,47 @@ Same as ways: buttons, displayed at the beginning
       "8"
     ]
   ]
- ```
+```
+# Optional parameters
+## client_secret
+Set if you are getting field 'secret' from vk API
+```json
+{
+  "client_secret": "secret"
+}
+```
+## redis_hostname
+Set if you want to change default value 127.0.0.1
+```json
+{
+  "redis_hostname": "127.0.0.1"
+}
+```
+## redis_port
+Set if you want to change default value 6379
+```json
+{
+  "redis_port": "6379"
+}
+```
+## default_message
+Bot will send it after recieving a regular message (without pushing a button). Default value is 'Выберите пункт'
+```json
+{
+  "default_message": "Выберите раздел"
+}
+```
+## greeting_message
+Bot will send it to start a conversation or after restart. Default value is 'Привет!'
+```json
+{
+    "greeting_message": "Клевер!"
+}
+```
+## return_button
+Add if you want to have a return button in every message which sends **start_buttons**'s menu to user
+```json
+{
+    "return_button": "В главное меню"
+}
+```
