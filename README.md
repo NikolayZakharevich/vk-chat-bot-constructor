@@ -23,7 +23,7 @@ Create your config.json file in constructor directory ([example](https://github.
 
 Then run following command:
 ```sh
-php ./bot_constructor.php
+php bot_constructor.php
 ```
 
 ## 4. Finish
