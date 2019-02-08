@@ -133,11 +133,11 @@ function _scenario_sendMessage($user_id, $message)
         }
     }
 
-    if ($storage->getCurrentStateId($user_id) != $storage->getStartStateId()) {
+    if (defined("RETURN_BUTTON") && $storage->getCurrentStateId($user_id) != $storage->getStartStateId()) {
         $return_button_payload = json_encode(array(
             "next_state" => $storage->getStartStateId()
         ), JSON_UNESCAPED_UNICODE);
-        $keyboard->add_button(TO_MENU_MESSAGE, $return_button_payload, Keyboard::RED);
+        $keyboard->add_button(RETURN_BUTTON, $return_button_payload, Keyboard::RED);
     }
 
     bot_sendMessage($user_id, $message, $keyboard->get_value());

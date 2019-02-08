@@ -55,7 +55,6 @@ function constructor_createBotConfig()
         new PhpConstant('REDIS_PORT', $parser->getRedisPort()),
         new PhpConstant('GREETING_MESSAGE', $parser->getGreetingMessage()),
         new PhpConstant('DEFAULT_MESSAGE', $parser->getDefaultMessage()),
-        new PhpConstant('TO_MENU_MESSAGE', $parser->getToMenuMessage())
     );
     $generator = new CodeGenerator(array(
         'generateEmptyDocblock' => false
@@ -68,7 +67,10 @@ function constructor_createBotConfig()
         $config_body = $config_body . $generator->generate($constant);
     }
     if ($parser->hasClientSecret()) {
-        $config_body = $config_body . "define('CLIENT_SECRET', '" . $parser->getClientSecret() . "');";
+        $config_body = $config_body . "define('CLIENT_SECRET', '" . $parser->getClientSecret() . "');\n";
+    }
+    if ($parser->hasReturnButton()) {
+        $config_body = $config_body . "define('RETURN_BUTTON', '" . $parser->getReturnButton() . "');";
     }
 
     file_put_contents($config_name, $config_body);

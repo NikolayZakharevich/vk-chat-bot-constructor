@@ -1,5 +1,5 @@
 {
-  "bot_directory": "/var/www/bots",
+  "bot_directory": "/home/nikolay/PhpstormProjects/Bot_Constructor/example-bot",
 
   "access_token": "7520591e054d99d764bc90aa13f8837569d39cf9796027afc9cb32db24fad2b58f9b7d720e99a6b73cce5",
   "confirmation_token" : "0c5ca142",

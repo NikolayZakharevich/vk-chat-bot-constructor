@@ -15,7 +15,6 @@ class Parser
     const DEFAULT_REDIS_PORT = 6379;
     const DEFAULT_GREETING_MESSAGE = 'Привет!';
     const DEFAULT_DEFAULT_MESSAGE = 'Выберите пункт';
-    const DEFAULT_TO_MENU_MESSAGE = 'В главное меню';
 
     private $states;
 
@@ -169,12 +168,14 @@ class Parser
         return self::DEFAULT_DEFAULT_MESSAGE;
     }
 
-    function getToMenuMessage()
+    function hasReturnButton()
     {
-        if (array_key_exists("to_menu_message", $this->scenario_data)) {
-            return $this->scenario_data["to_menu_message"];
-        }
-        return self::DEFAULT_TO_MENU_MESSAGE;
+        return array_key_exists("return_button", $this->scenario_data);
+    }
+
+    function getReturnButton()
+    {
+        return $this->scenario_data["return_button"];
     }
 
     function get_states()
@@ -205,7 +206,7 @@ class Parser
             "text" => $this->getDefaultMessage()
         );
 
-        $result["states"][$initial_state["id"]] = $initial_state;
+        $result["states"][$initial_state_id] = $initial_state;
         $result["start"] = $initial_state_id;
 
         return $result;
